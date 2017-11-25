@@ -290,14 +290,54 @@ digraph {
         workingeffectivelylegacycode -> sebottom [style=invis]
     }
 
-    subgraph cluster_math {
+	subgraph cluster_math_basic {
+        fillcolor="#f2f8ec"
+        label=<<TABLE BORDER="0" CELLPADDING="10"><TR><TD>4. Basic Mathematics</TD></TR></TABLE>>
+
+        {
+            node [shape="box", style="rounded,filled", color="#d9ebc6"]
+            math_basic_begin [label="Beginning Mathematics for Loss Programming"]
+            math_basic_advanced [label="Advanced Mathematics for Loss Programming"]
+        }
+
+        math_basic_begin -> math_basic_advanced
+
+        math_basic_top [fixedsize=true,width=8,height=0.01,style=invis,label=""]
+        math_basic_bottom [fixedsize=true,width=8,height=0.01,style=invis,label=""]
+        math_basic_top -> math_basic_begin [style=invis]
+        math_basic_advanced -> math_basic_bottom [style=invis]
+
+    }
+
+	subgraph cluster_math_ai {
+        fillcolor="#f2f8ec"
+        label=<<TABLE BORDER="0" CELLPADDING="10"><TR><TD>4. Mathematics for Loss Programming</TD></TR></TABLE>>
+
+        {
+            node [shape="box", style="rounded,filled", color="#d9ebc6"]
+            math_ai_begin [label="Beginning Mathematics for Loss Programming"]
+            math_ai_advanced [label="Advanced Mathematics for Loss Programming"]
+        }
+
+        pgm_ai [label=<<TABLE BORDER="0" CELLSPACING="0"><TR><TD WIDTH="100" HEIGHT="100" FIXEDSIZE="TRUE"><IMG SCALE="TRUE" SRC="images/pgm.jpg"/></TD></TR><TR><TD>Probabilistic Graphical Models</TD></TR></TABLE>> URL="https://www.amazon.com/dp/0262013193"]
+
+        math_ai_begin -> math_ai_advanced -> pgm_ai
+
+        math_ai_top [fixedsize=true,width=8,height=0.01,style=invis,label=""]
+        math_ai_bottom [fixedsize=true,width=8,height=0.01,style=invis,label=""]
+        math_ai_top -> math_ai_begin [style=invis]
+        pgm_ai -> math_ai_bottom [style=invis]
+
+    }
+
+    subgraph cluster_math_game {
         fillcolor="#f2f8ec"
         label=<<TABLE BORDER="0" CELLPADDING="10"><TR><TD>4. Mathematics for Game Programming</TD></TR></TABLE>>
 
         {
             node [shape="box", style="rounded,filled", color="#d9ebc6"]
-            mathbegin [label="Beginning Mathematics for Game Programming"]
-            mathadvanced [label="Advanced Mathematics for Game Programming"]
+            math_game_begin [label="Beginning Mathematics for Game Programming"]
+            math_game_advanced [label="Advanced Mathematics for Game Programming"]
         }
 
         foundationsgedmath [label=<<TABLE BORDER="0" CELLSPACING="0"><TR><TD WIDTH="100" HEIGHT="100" FIXEDSIZE="TRUE"><IMG SCALE="TRUE" SRC="images/foundationsgedmath.jpg"/></TD></TR><TR><TD>Foundations of Game<br/>Engine Development,<br/>Vol 1: Mathematics<br/>(2016)</TD></TR></TABLE>> URL="https://www.amazon.com/dp/0985811749/"]
@@ -311,22 +351,22 @@ digraph {
         visualizingquaternions [label=<<TABLE BORDER="0" CELLSPACING="0"><TR><TD WIDTH="100" HEIGHT="100" FIXEDSIZE="TRUE"><IMG SCALE="TRUE" SRC="images/visualizingquaternions.jpg"/></TD></TR><TR><TD>Visualizing Quaternions<br/>(2006)</TD></TR></TABLE>> URL="https://www.amazon.com/dp/0120884003/"]
         divgradcurl4 [label=<<TABLE BORDER="0" CELLSPACING="0"><TR><TD WIDTH="100" HEIGHT="100" FIXEDSIZE="TRUE"><IMG SCALE="TRUE" SRC="images/divgradcurl4.jpg"/></TD></TR><TR><TD>Div, Grad, Curl<br/>and all That<br/>4th Ed (2004)</TD></TR></TABLE>> URL="https://www.amazon.com/dp/0393925161/"]
 
-        mathbegin -> foundationsgedmath
-        mathbegin -> math3dcpcg3 -> mathadvanced [arrowhead=normal, style=solid]
-        mathbegin -> "3dmathprimer2"
-        mathbegin -> essentialmaths3
+        math_game_begin -> foundationsgedmath
+        math_game_begin -> math3dcpcg3 -> mathadvanced [arrowhead=normal, style=solid]
+        math_game_begin -> "3dmathprimer2"
+        math_game_begin -> essentialmaths3
 
-        { foundationsgedmath; "3dmathprimer2"; essentialmaths3 } -> mathadvanced
+        { foundationsgedmath; "3dmathprimer2"; essentialmaths3 } -> math_game_advanced
 
-        mathadvanced -> geometrictools -> computationalgeometry [arrowhead=normal, style=solid]
-        mathadvanced -> geometricalgebra
-        mathadvanced -> visualizingquaternions
-        mathadvanced -> divgradcurl4
+        math_game_advanced -> geometrictools -> computationalgeometry [arrowhead=normal, style=solid]
+        math_game_advanced -> geometricalgebra
+        math_game_advanced -> visualizingquaternions
+        math_game_advanced -> divgradcurl4
 
-        mathtop [fixedsize=true,width=8,height=0.01,style=invis,label=""]
-        mathbottom [fixedsize=true,width=8,height=0.01,style=invis,label=""]
-        mathtop -> mathbegin [style=invis]
-        computationalgeometry -> mathbottom [style=invis]
+        math_game_top [fixedsize=true,width=8,height=0.01,style=invis,label=""]
+        math_game_bottom [fixedsize=true,width=8,height=0.01,style=invis,label=""]
+        math_game_top -> math_game_begin [style=invis]
+        computationalgeometry -> math_game_bottom [style=invis]
     }
 
     subgraph cluster_gameprog {
@@ -805,8 +845,10 @@ digraph {
         kidbottom -> cstop
         csbottom -> progtop
         progbottom -> setop
-        sebottom -> mathtop
-        mathbottom -> gametop
+        sebottom -> math_basic_top
+        math_basic_bottom -> math_ai_top
+        math_ai_bottom -> math_game_top
+        math_game_bottom -> gametop
         gamebottom -> getop
         gebottom -> cgtop
         cgbottom -> audiotop
